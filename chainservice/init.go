@@ -75,6 +75,7 @@ func TestPeer(peer string) error {
 		Database:     db,
 		ChainParams:  chaincfg.MainNetParams,
 		ConnectPeers: []string{peer},
+		RestPeers:    []string{"https://bb1.breez.technology", "https://bb1.breez.technology"},
 	}
 	chainService, err := neutrino.NewChainService(neutrinoConfig)
 	if err != nil {

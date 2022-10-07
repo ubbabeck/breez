@@ -9,6 +9,7 @@ import (
 	"errors"
 	"fmt"
 	"sync/atomic"
+	"time"
 
 	"github.com/breez/breez/bootstrap"
 	"github.com/breez/breez/chainservice"
@@ -37,12 +38,15 @@ func (a *App) Start() error {
 	if atomic.SwapInt32(&a.started, 1) == 1 {
 		return errors.New("Breez already started")
 	}
-
+	a.log.Info("start timer")
+	start := time.Now()
 	a.log.Info("app.start before bootstrap")
 	if err := chainservice.Bootstrap(a.cfg.WorkingDir); err != nil {
 		a.log.Info("app.start bootstrap error %v", err)
 		return err
 	}
+	elapsed := time.Since(start)
+	a.log.Infof("app took %v seconds to bootstap.", elapsed)
 
 	services := []Service{
 		a.lnDaemon,
