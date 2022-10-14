@@ -374,6 +374,7 @@ func EnableAccount(enabled bool) error {
 AddFundsInit is part of the binding inteface which is delegated to breez.AddFundsInit
 */
 func AddFundsInit(initRequest []byte) ([]byte, error) {
+	Log("binding: starting add funds request...", "INFO")
 	request := &data.AddFundInitRequest{}
 	if err := proto.Unmarshal(initRequest, request); err != nil {
 		return nil, err
