@@ -26,7 +26,7 @@ require (
 	github.com/urfave/cli v1.22.9
 	go.etcd.io/bbolt v1.3.6
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519
-	golang.org/x/mobile v0.0.0-20221010194247-58284a7bfc4e
+	golang.org/x/mobile v0.0.0-20221012134814-c746ac228303
 	golang.org/x/net v0.0.0-20211015210444-4f30a5c0130f
 	golang.org/x/oauth2 v0.0.0-20210615190721-d04028783cf1
 	golang.org/x/sync v0.0.0-20220819030929-7fc1605a5dde
@@ -181,6 +181,6 @@ replace (
 	github.com/btcsuite/btcwallet => github.com/breez/btcwallet v0.15.2-0.20220717090508-739787f948a6
 	github.com/btcsuite/btcwallet/walletdb => github.com/breez/btcwallet/walletdb v1.4.1-0.20220717090508-739787f948a6
 	github.com/btcsuite/btcwallet/wtxmgr => github.com/breez/btcwallet/wtxmgr v1.5.1-0.20220717090508-739787f948a6
-	github.com/lightningnetwork/lnd => github.com/breez/lnd v0.15.2-beta.0.20221013193940-9af3fc96eb17
 	github.com/lightninglabs/neutrino => github.com/ubbabeck/neutrino v0.0.0-20221006102748-558280be55a4
+	github.com/lightningnetwork/lnd => github.com/breez/lnd v0.15.2-beta.0.20221013193940-9af3fc96eb17
 )

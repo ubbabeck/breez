@@ -207,6 +207,7 @@ func newNeutrino(workingDir string, cfg *config.Config, peers []string) (*neutri
 
 	neutrinoDataDir, db, err := GetNeutrinoDB(workingDir)
 	if err != nil {
+		logger.Infof("creating new neutrino service failed.")
 		return nil, nil, err
 	}
 	neutrinoConfig := neutrino.Config{
@@ -231,8 +232,12 @@ func GetNeutrinoDB(workingDir string) (string, walletdb.DB, error) {
 		return "", nil, err
 	}
 
+	logger.Infof("creating neutrino db at %v", workingDir)
 	db, err := walletdb.Create("bdb", neutrinoDB, false, time.Second*60)
-	fmt.Printf("neutrinoDB err = %v", err)
+	if err != nil {
+		logger.Infof("error creating neutrino db at %v, failed with %w", neutrinoDB, err)
+		return "", nil, err
+	}
 	return neutrinoDataDir, db, err
 }
 
