@@ -122,7 +122,10 @@ func createService(workingDir string, breezDB *db.DB) (*neutrino.ChainService, r
 		return nil, nil, err
 	}
 
-	service, walletDB, err = newNeutrino(workingDir, config, peers)
+	// todo(ubbabeck) feed the rest peer dynamically
+	restPeers := []string{"https://bb2.breez.technology", "https://bb1.breez.technology"}
+
+	service, walletDB, err = newNeutrino(workingDir, config, peers, restPeers)
 	if err != nil {
 		logger.Errorf("failed to create chain service %v", err)
 		return nil, stopService, err
@@ -196,7 +199,7 @@ func parseAssertFilterHeader(headerStr string) (*headerfs.FilterHeader, error) {
 newNeutrino creates a chain service that the sync job uses
 in order to fetch chain data such as headers, filters, etc...
 */
-func newNeutrino(workingDir string, cfg *config.Config, peers []string) (*neutrino.ChainService, walletdb.DB, error) {
+func newNeutrino(workingDir string, cfg *config.Config, peers []string, restPeers []string) (*neutrino.ChainService, walletdb.DB, error) {
 	params, err := ChainParams(cfg.Network)
 
 	if err != nil {
@@ -215,6 +218,7 @@ func newNeutrino(workingDir string, cfg *config.Config, peers []string) (*neutri
 		Database:     db,
 		ChainParams:  *params,
 		ConnectPeers: peers,
+		RestPeers:    restPeers,
 	}
 	logger.Infof("creating new neutrino service.")
 	chainService, err := neutrino.NewChainService(neutrinoConfig)

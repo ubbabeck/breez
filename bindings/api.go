@@ -484,6 +484,7 @@ func SendPaymentFailureBugReport(report string) error {
 AddInvoice is part of the binding inteface which is delegated to breez.AddInvoice
 */
 func AddInvoice(invoice []byte) ([]byte, error) {
+	Log("binding: starting add ivoice request...", "INFO")
 	decodedRequest := &data.AddInvoiceRequest{}
 	proto.Unmarshal(invoice, decodedRequest)
 	payreq, fee, err := getBreezApp().AccountService.AddInvoice(decodedRequest)
